@@ -1,11 +1,10 @@
-name: keras_test
+name: MLflow Examples
 
 conda_env: conda.yaml
 
 entry_points:
-  keras_test:
+  main:
     parameters:
-
       drop_rate: {type: float, default: 0.5}
       input_dim: {type: int, default: 20}
       bs: {type: int, default: 1000}
