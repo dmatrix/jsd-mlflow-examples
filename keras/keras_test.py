@@ -1,10 +1,12 @@
 import numpy as np
 import argparse
-import mlflow
 import mlflow.sklearn
+
+import tensorflow as tf
 
 from keras import Sequential
 from keras.layers import Dense, Dropout
+
 
 from time import time
 
@@ -44,7 +46,8 @@ def compile_and_run_model(mdl, train_data, epochs=20, batch_size=128):
     mdl.compile(loss='binary_crossentropy',
               optimizer='rmsprop',
               metrics=['accuracy'])
-    #
+
+    #tf.keras.estimator.model_to_estimator(keras_model=mdl)
     # train the model
     #
     mdl.fit(train_data[0], train_data[1],
@@ -105,5 +108,5 @@ if __name__ == '__main__':
         mlflow.log_param("acc", results[1])
 
     end_time: float = time()
-    
+
     print("Run time = %d" % (end_time-start_time))
