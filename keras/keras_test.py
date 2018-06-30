@@ -21,7 +21,6 @@ def gen_data(input_dim=20, bsize=1000):
     y_test = np.random.randint(2, size=(int(bsize * 0.10), 1))
 
     return [x_train, y_train, x_test, y_test]
-
 #
 #build a  a network
 #
@@ -54,7 +53,6 @@ def compile_and_run_model(mdl, train_data, epochs=20, batch_size=128):
           epochs=epochs,
           batch_size=bs,
           verbose=0)
-
     #
     # evaluate the network
     #
@@ -63,7 +61,8 @@ def compile_and_run_model(mdl, train_data, epochs=20, batch_size=128):
     print('Test accuracy:', score[1])
 
     print("Predictions for Y:")
-    print(mdl.predict(data[2]))
+    print(mdl.predict(data[2][:5]))
+    model.summary()
 
     return ([score[0], score[1]])
 
