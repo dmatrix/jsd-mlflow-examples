@@ -28,6 +28,6 @@ It will log metrics and parameters in the `mlruns` directory.
 
 Alternatively, you can run using the `mlflow` command.
 
-`mlflow run . e keras-test` -P --drop_rate=0.3 -P output=128`
+`mlflow run . e keras-test -P --drop_rate=0.3 -P output=128`
 
 
