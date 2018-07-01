@@ -3,8 +3,6 @@ import argparse
 import mlflow.sklearn
 from mlflow import log_metric
 
-import tensorflow as tf
-
 from keras import Sequential
 from keras.layers import Dense, Dropout
 
@@ -47,7 +45,6 @@ def compile_and_run_model(mdl, train_data, epochs=20, batch_size=128):
               optimizer='rmsprop',
               metrics=['accuracy'])
 
-    #tf.keras.estimator.model_to_estimator(keras_model=mdl)
     # train the model
     #
     mdl.fit(train_data[0], train_data[1],

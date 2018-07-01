@@ -1,7 +1,7 @@
 # mlflow-examles
-This is a collection of MLflow project examples that you can directly run with mlflow CLI commands.
+This is a collection of MLflow project examples that you can directly run with mlflow CLI commands on using python.
 
-The goal is to give you set of samples to get you quickly started on MLFlow.
+The goal provide you with a set of samples to get you quickly started on MLFlow.
 
 ## Keras Test Model.
 
