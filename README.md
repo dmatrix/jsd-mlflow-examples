@@ -33,13 +33,33 @@ Alternatively, you can run using the `mlflow` command.
 
 `mlflow run . e keras-test -P --drop_rate=0.3 -P output=128`
 
-## Keras Multi-class Classification Model
+The next two examples are from [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python?a_aid=keras&a_bid=76564dff).
+While the Jupyter notebooks can be found [here](https://github.com/fchollet/deep-learning-with-python-notebooks), I have modified the code 
+to tailor for use with MLflow. The description and experimentation remain the same, hence it fits well with using MLflow to experiments
+various networks layers and suggested parameters to evaluate the model.
 
-..coming soon
+## Classifying Movie Reviews: a Keras binary classification example
 
-## Keras Image Multi-class Classification Model
+This contains the code samples found in Chapter 3, Section 5 of [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python?a_aid=keras&a_bid=76564dff). 
 
-..coming soon
+----
+
+Two-class classification, or binary classification, may be the most widely applied kind of machine learning problem. In this example, we 
+will learn to classify movie reviews into "positive" reviews and "negative" reviews, just based on the text content of the reviews.
+
+## Classifying Newswires: a multi-class Keras classification example
+
+This contains the code samples found in Chapter 3, Section 5 of [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python?a_aid=keras&a_bid=76564dff). 
+
+----
+
+In the above model we saw how to classify vector inputs into two mutually exclusive classes using a densely-connected neural network. 
+But what happens when you have more than two classes? 
+
+In this section, we will build a network to classify Reuters newswires into 46 different mutually-exclusive topics. Since we have many 
+classes, this problem is an instance of "multi-class classification", and since each data point should be classified into only one 
+category, the problem is more specifically an instance of "single-label, multi-class classification". If each data point could have 
+belonged to multiple categories (in our case, topics) then we would be facing a "multi-label, multi-class classification" problem.
 
 
 
