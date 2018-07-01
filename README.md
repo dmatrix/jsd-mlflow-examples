@@ -9,7 +9,10 @@ This is a simple Keras neural network model with three layers, one input, one hi
 and one output layer. It's a simple linear model: `y=Mx`. Given a random numbers of X values,
 it learns to predict it's Y value, from a training set.
 
-The arguments to run this simple Keras network model are as follows:
+This Multi-layer Perceptron (MLP) for binary classification model's sources have been modified from this [gist](https://gist.github.com/candlewill/552fa102352ccce42fd829ae26277d24). 
+You can use other network models from this gist in a similar fashion to experiment. 
+
+The arguments to run this simple MLP Keras network model are as follows:
 
 * `--drop_rate`: Optional argument with a default value is `0.5`.
 * `--input_dim  `: Input dimension. Default is `20`.
