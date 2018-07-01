@@ -1,6 +1,7 @@
 import numpy as np
 import argparse
 import mlflow.sklearn
+from mlflow import log_metric
 
 import tensorflow as tf
 
@@ -17,7 +18,7 @@ def gen_data(input_dim=20, bsize=1000):
     # Generate dummy data for training and test set
     x_train = np.random.random((bsize, input_dim))
     y_train = np.random.randint(2, size=(bsize, 1))
-    x_test = np.random.random((int(bsize * 0.10) , input_dim))
+    x_test = np.random.random((int(bsize * 0.10), input_dim))
     y_test = np.random.randint(2, size=(int(bsize * 0.10), 1))
 
     return [x_train, y_train, x_test, y_test]
@@ -68,7 +69,7 @@ def compile_and_run_model(mdl, train_data, epochs=20, batch_size=128):
 
 if __name__ == '__main__':
 
-    drop_rate= 0.5
+    drop_rate = 0.5
     input_dim = 20
     bs = 1000
     output = 64
@@ -94,7 +95,7 @@ if __name__ == '__main__':
     data = gen_data(input_dim=input_dim, bsize=bs)
     model = build_model(in_dim=input_dim, drate=drop_rate, out=output)
 
-    start_time: float = time()
+    start_time = time()
     with mlflow.start_run():
         results = compile_and_run_model(model, data, epochs=epochs, batch_size=bs)
         mlflow.log_param("drop_rate", args.drop_rate)
@@ -106,6 +107,9 @@ if __name__ == '__main__':
         mlflow.log_param("loss", results[0])
         mlflow.log_param("acc", results[1])
 
-    end_time: float = time()
+    timed = time() - start_time
 
-    print("Run time = %d" % (end_time-start_time))
+    print("This model took", timed, "seconds to train and test.")
+    log_metric("Time to run", timed)
+
+
