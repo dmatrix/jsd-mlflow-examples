@@ -1,9 +1,9 @@
-# mlflow-examples
+# jsd-mlflow-examples
 This is a collection of MLflow project examples that you can directly run with mlflow CLI commands on using python.
 
 The goal provide you with a set of samples to get you quickly started on MLFlow.
 
-## Keras Test Model.
+## Keras MLP Binary Classification Model.
 
 This is a simple Keras neural network model with three layers, one input, one hidden,
 and one output layer. It's a simple linear model: `y=Mx`. Given a random numbers of X values,
@@ -32,5 +32,14 @@ It will log metrics and parameters in the `mlruns` directory.
 Alternatively, you can run using the `mlflow` command.
 
 `mlflow run . e keras-test -P --drop_rate=0.3 -P output=128`
+
+## Keras Multi-class Classification Model
+
+..coming soon
+
+## Keras Image Multi-class Classification Model
+
+..coming soon
+
 
 
