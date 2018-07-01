@@ -1,4 +1,4 @@
-# mlflow-examles
+# mlflow-examples
 This is a collection of MLflow project examples that you can directly run with mlflow CLI commands on using python.
 
 The goal provide you with a set of samples to get you quickly started on MLFlow.
