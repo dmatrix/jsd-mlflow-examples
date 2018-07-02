@@ -1,4 +1,4 @@
-name: keras_test
+name: keras_nn_model
 channels:
   - defaults
 dependencies:

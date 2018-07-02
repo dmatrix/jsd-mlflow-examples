@@ -6,7 +6,6 @@ from mlflow import log_metric
 from keras import Sequential
 from keras.layers import Dense, Dropout
 
-
 from time import time
 
 # Generate dummy data for training and test set
