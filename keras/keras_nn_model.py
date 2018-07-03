@@ -53,13 +53,13 @@ def compile_and_run_model(mdl, train_data, epochs=20, batch_size=128):
     #
     # evaluate the network
     #
-    score = mdl.evaluate(train_data[2], train_data[3], batch_size=bs)
+    score = mdl.evaluate(train_data[2], train_data[3], batch_size=batch_size)
     print('Test loss:', score[0])
     print('Test accuracy:', score[1])
 
     print("Predictions for Y:")
-    print(mdl.predict(data[2][:5]))
-    model.summary()
+    print(mdl.predict(train_data[2][:5]))
+    mdl.summary()
 
     return ([score[0], score[1]])
 
@@ -93,7 +93,7 @@ if __name__ == '__main__':
 
     start_time = time()
     with mlflow.start_run():
-        results = compile_and_run_model(model, data, epochs=epochs, batch_size=bs)
+        results = compile_and_run_model(model, data, epochs=epochs, batch_size=batch_size)
         mlflow.log_param("drop_rate", args.drop_rate)
         mlflow.log_param("input_dim", args.input_dim)
         mlflow.log_param("size", args.bs)
