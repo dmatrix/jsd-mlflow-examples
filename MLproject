@@ -1,9 +1,9 @@
-name: JSD MLflow Examples
+name: keras-examples
 
 conda_env: conda.yaml
 
 entry_points:
-  keras-nn-model:
+  main:
     parameters:
       drop_rate: {type: float, default: 0.5}
       input_dim: {type: int, default: 20}
@@ -12,7 +12,7 @@ entry_points:
       train_batch_size: {type: int, default: 128}
       epochs: {type: int, default: 20}
     command: "python keras/keras_nn_model.py [--drop_rate=value] [--input_dim=value] [--bs=value] [--output=value] [--train_batch_size=value] [--epochs=value]"
-  main-nn:
+  main:
     parameters:
       drop_rate: {type: float, default: 0.5}
       input_dim: {type: int, default: 20}
