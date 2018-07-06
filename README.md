@@ -1,9 +1,11 @@
 # jsd-mlflow-examples
-This is a collection of MLflow project examples that you can directly run with mlflow CLI commands on using python.
+This is a collection of MLflow project examples that you can directly run with mlflow CLI commands using Python.
 
-The goal provide you with a set of samples to get you quickly started on MLFlow.
+The goal is provide you with additional set of samples, focusing on machine learning and deep learning examples, to get you quickly started on MLFlow. 
+In particular, I focus on [Keras](https://keras.io) and borrow and extend examples
+from Francois Cholllet's book: [_Deep Learning with Python_](https://www.manning.com/books/deep-learning-with-python?a_aid=keras&a_bid=76564dff)
 
-## Keras MLP Binary Classification Model.
+## 1. Keras MLP Binary Classification Model.
 
 This is a simple Keras neural network model with three layers, one input, one hidden,
 and one output layer. It's a simple linear model: `y=Mx`. Given a random numbers of X values,
@@ -46,7 +48,7 @@ While the Jupyter notebooks can be found [here](https://github.com/fchollet/deep
 to tailor for use with MLflow. The description and experimentation remain the same, hence it fits well with using MLflow to experiments
 various networks layers and suggested parameters to evaluate the model.
 
-## Classifying Movie Reviews: a Keras binary classification example
+## 2. Classifying Movie Reviews: a Keras binary classification example
 
 This contains the code samples found in Chapter 3, Section 5 of [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python?a_aid=keras&a_bid=76564dff). 
 
@@ -55,7 +57,7 @@ This contains the code samples found in Chapter 3, Section 5 of [Deep Learning w
 Two-class classification, or binary classification, may be the most widely applied kind of machine learning problem. In this example, we 
 will learn to classify movie reviews into "positive" reviews and "negative" reviews, just based on the text content of the reviews.
 
-## Classifying Newswires: a multi-class Keras classification example
+## 3. Classifying Newswires: a multi-class Keras classification example
 
 This contains the code samples found in Chapter 3, Section 5 of [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python?a_aid=keras&a_bid=76564dff). 
 
