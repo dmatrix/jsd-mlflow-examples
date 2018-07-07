@@ -1,5 +1,5 @@
 # jsd-mlflow-examples
-This is a collection of MLflow project examples that you can directly run with mlflow CLI commands using Python.
+This is a collection of MLflow project examples that you can directly run with mlflow CLI commands or directly using Python.
 
 The goal is provide you with additional set of samples, focusing on machine learning and deep learning examples, to get you quickly started on MLFlow. 
 In particular, I focus on [Keras](https://keras.io) and borrow and extend examples
@@ -45,8 +45,8 @@ Alternatively, you can run using the `mlflow` command.
 
 The next two examples are from [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python?a_aid=keras&a_bid=76564dff).
 While the Jupyter notebooks can be found [here](https://github.com/fchollet/deep-learning-with-python-notebooks), I have modified the code 
-to tailor for use with MLflow. The description and experimentation remain the same, hence it fits well with using MLflow to experiments
-various networks layers and suggested parameters to evaluate the model.
+to tailor for use with MLflow. The description and experimentation remain the same, hence it fits well with using MLflow to experiment
+various capacity of networks layers and suggested parameters to evaluate the model.
 
 ## 2. Classifying Movie Reviews: a Keras binary classification example
 
