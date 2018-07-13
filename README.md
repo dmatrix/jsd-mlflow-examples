@@ -57,6 +57,27 @@ This contains the code samples found in Chapter 3, Section 5 of [Deep Learning w
 Two-class classification, or binary classification, may be the most widely applied kind of machine learning problem. In this example, we 
 will learn to classify movie reviews into "positive" reviews and "negative" reviews, just based on the text content of the reviews.
 
+This MlFlow model creates two types of models for you to work with. First, it creates a baseline model with default
+parameters:
+
+ * loss function as 'rmstrop'
+ * learning rate as 0.001
+ * a Keras neural network model of
+    * An input layer with  input_shape (10000, )
+    * 1 hidden layer with output = 32 
+    * 1 Output layer with output = 1
+    * All layers use `relu` as an activation function except for `sigmod` that is used in the final output layer.
+  * epochs = 20; batch_size=512
+ 
+ And the second model can me created by experimenting by changing any of the these parameters to measure the metrics:
+ 
+  * Use 2 or more hidden layers
+  * Try hidden layers with output 32, 64 or 128 and see if that affects the metrics
+  * Try to use the 'mse' loss function instead of `binar_crossentropy`
+  
+ ### How to Use MLflow to Experiment and Log Metrics
+ Coming soon....
+ 
 ## 3. Classifying Newswires: a multi-class Keras classification example
 
 This contains the code samples found in Chapter 3, Section 5 of [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python?a_aid=keras&a_bid=76564dff). 
