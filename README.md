@@ -60,7 +60,7 @@ will learn to classify movie reviews into "positive" reviews and "negative" revi
 This MlFlow model creates two types of models for you to work with. First, it creates a baseline model with default
 parameters:
 
- * loss function as 'rmstrop'
+ * loss function as `rmstrop`
  * learning rate as 0.001
  * a Keras neural network model of
     * An input layer with  input_shape (10000, )
@@ -77,7 +77,11 @@ parameters:
   
   In both cases, the model will create images for training and validation loss/accuracy images in the images directory
   
- ### How to Use MLflow to Experiment and Log Metrics
+  ![Baseline Loss](./keras/binary_classifier_nn/images/baseline_loss.png)
+  
+  ![Baseline Accuracy](./keras/binary_classifier_nn/images/baseline_accuracy.png)
+  
+ ### How to Use MLflow to Experiment, Log Metrics and Artifacts
  Coming soon....
  
 ## 3. Classifying Newswires: a multi-class Keras classification example
