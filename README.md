@@ -75,6 +75,8 @@ parameters:
   * Try hidden layers with output 32, 64 or 128 and see if that affects the metrics
   * Try to use the 'mse' loss function instead of `binar_crossentropy`
   
+  In both cases, the model will create images for training and validation loss/accuracy images in the images directory
+  
  ### How to Use MLflow to Experiment and Log Metrics
  Coming soon....
  
