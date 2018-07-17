@@ -48,12 +48,12 @@ While the Jupyter notebooks can be found [here](https://github.com/fchollet/deep
 to tailor for use with MLflow. The description and experimentation remain the same, hence it fits well with using MLflow to experiment
 various capacity of networks layers and suggested parameters to evaluate the model.
 
-## 2. Classifying Movie Reviews: a Keras binary classification example
+## 2. Classifying Movie Reviews: a Keras binary classification example.
+----
 
 This part comprises of code samples found in Chapter 3, Section 5 of [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python?a_aid=keras&a_bid=76564dff). 
 The borrowed code from the book has been modularized and adjusted to work with MLflow, and it fits well since Francois
 suggests some experimentation parameters to tweak to see how the model metrics change.
-----
 
 Two-class classification, or binary classification, may be the most widely applied kind of machine learning problem. In this example, we 
 will learn to classify movie reviews into "positive" reviews and "negative" reviews, just based on the text content of the reviews.
