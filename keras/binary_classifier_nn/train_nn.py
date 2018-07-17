@@ -102,7 +102,6 @@ def get_images_directory_path():
     if not os.path.exists(image_dir):
         os.mkdir(image_dir, mode=0o755)
 
-    print(image_dir)
     return image_dir
 
 def train_models(args, base_line=True):
@@ -174,7 +173,7 @@ def train_models(args, base_line=True):
         mlflow.log_param("validation_loss", get_binary_loss(history))
         mlflow.log_param("validation_acc", get_validation_acc(history))
         mlflow.log_param("results", results)
-        mlflow.log_artifacts("images/")
+        mlflow.log_artifacts(image_dir)
         mlflow.log_metric("Time to run", timed)
 
     print("This model took", timed, "seconds to train and test.")
