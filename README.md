@@ -92,12 +92,12 @@ the following command:
 
 `python main_nn.py`
 
-To experiment different runs to evaluate metrics, you can alter the arguments, for example, 
+To experiment different runs, with different parameters suggested above, and evaluate new metrics, you can alter the arguments. For example, 
 expand the size of network by providing more `output` to the hidden layers. Or you 
 may change the `hidden_layers` or `epochs` or `loss` function — all will alter the loss and 
 accuracy of the network model. For example,
 
-`python main_nn.py --hidden_laysers=3 --output=32 --epochs=30`
+`python main_nn.py --hidden_laysers=3 --output=32 --epochs=30 --loss=mse`
 
 It will log metrics and parameters in the `mlruns` directory. 
 
@@ -108,7 +108,7 @@ installing dependency packages listed in `conda.yml`
 
 `mlflow run . -e binary-nn-model`
 
-`mlflow run . -e binary-nn-model -P hidden_layers=3 -P output=32 -P epochs=30`
+`mlflow run . -e binary-nn-model -P hidden_layers=3 -P output=32 -P epochs=30 -P loss=mse`
 
  To view the output of either runs, launch the mlflow ui:
  
