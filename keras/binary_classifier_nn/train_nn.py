@@ -2,6 +2,7 @@ import data_utils_nn
 import model_nn
 import graphs_nn
 import matplotlib
+import os
 import sys
 import mlflow
 
@@ -93,6 +94,17 @@ def print_metrics(hist):
     print("Final metrics: validation_binary_loss:%6.4f" % val_loss_value)
     print("Final metrics: validation_binary_accuracy:%6.4f" % val_acc_value)
 
+def get_images_directory_path():
+
+    cwd = os.getcwd()
+
+    image_dir = os.path.join(cwd, "images")
+    if not os.path.exists(image_dir):
+        os.mkdir(image_dir, mode=0o755)
+
+    print(image_dir)
+    return image_dir
+
 def train_models(args, base_line=True):
     """
     Train the model and log all the MLflow Metrics
@@ -110,18 +122,18 @@ def train_models(args, base_line=True):
     y_train = data_utils_nn.prepare_vectorized_labels(train_labels)
     y_test = data_utils_nn.prepare_vectorized_labels(test_labels)
 
+    image_dir = get_images_directory_path()
+
     graph_label_loss = 'Baseline Model: Training and Validation Loss'
     graph_label_acc = 'Baseline Model: Training and Validation Accuracy'
-    graph_image_loss_png = 'images/baseline_loss.png'
-    graph_image_acc_png = 'images/baseline_accuracy.png'
-    experiment_name = 'baseline'
+    graph_image_loss_png = os.path.join(image_dir,'baseline_loss.png')
+    graph_image_acc_png = os.path.join(image_dir, 'baseline_accuracy.png')
 
     if not base_line:
         graph_label_loss = 'Experimental: Training and Validation Loss'
         graph_label_acc = 'Experimental Model: Training and Validation Accuracy'
-        graph_image_loss_png = 'images/experimental_loss.png'
-        graph_image_acc_png = 'images/experimental_accuracy.png'
-        experiment_name = 'experimental'
+        graph_image_loss_png = os.path.join(image_dir, 'experimental_loss.png')
+        graph_image_acc_png = os.path.join(image_dir,'experimental_accuracy.png')
 
     if base_line:
         print("Baseline Model:")
@@ -152,7 +164,6 @@ def train_models(args, base_line=True):
 
     timed = time() - start_time
 
-    #exp_uuid = mlflow.create_experiment(experiment_name + "-" + str(timed))
     with mlflow.start_run():
         mlflow.log_param("hidden_layers", args.hidden_layers)
         mlflow.log_param("output", args.output)
