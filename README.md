@@ -49,7 +49,6 @@ to tailor for use with MLflow. The description and experimentation remain the sa
 various capacity of networks layers and suggested parameters to evaluate the model.
 
 ## 2. Classifying Movie Reviews: a Keras binary classification example.
-----
 
 This part comprises of code samples found in Chapter 3, Section 5 of [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python?a_aid=keras&a_bid=76564dff). 
 The borrowed code from the book has been modularized and adjusted to work with MLflow, and it fits well since Francois
@@ -104,9 +103,12 @@ It will log metrics and parameters in the `mlruns` directory.
 
 Alternatively, you can run using the `mlflow` command.
 
-`mlflow run . -e binary--nn-model`
+**Note**: `mlflow run..` may take longer as it needs to create and setup an environment by and downloand and
+installing dependency packages listed in `conda.yml`
 
-`mlflow run . -e binary--nn-model -P --hidden_laysers=3 -P --output=32 -P --epochs=30`
+`mlflow run . -e binary-nn-model`
+
+`mlflow run . -e binary-nn-model -P --hidden_laysers=3 -P --output=32 -P --epochs=30`
 
  To view the output of the runs, launch the mlflow ui:
  
