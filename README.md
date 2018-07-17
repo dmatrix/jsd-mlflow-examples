@@ -108,13 +108,13 @@ installing dependency packages listed in `conda.yml`
 
 `mlflow run . -e binary-nn-model`
 
-`mlflow run . -e binary-nn-model -P --hidden_laysers=3 -P --output=32 -P --epochs=30`
+`mlflow run . -e binary-nn-model -P hidden_layers=3 -P output=32 -P epochs=30`
 
- To view the output of the runs, launch the mlflow ui:
+ To view the output of either runs, launch the mlflow ui:
  
  `mlflow ui`
  
- These runs will not only log metrics for loss and accuracy but also log graphs generatged from `matplotlib` for 
+ These runs will not only log metrics for loss and accuracy but also log graphs generated from `matplotlib` for 
  perusal as part of visual artifacts.
  
  ![Saved Arficats](./keras/binary_classifier_nn/images/mlflow_ui_artifacts.png)
