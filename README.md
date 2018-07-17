@@ -121,6 +121,8 @@ installing dependency packages listed in `conda.yml`
  
  ![Saved Arficats](./keras/binary_classifier_nn/images/mlflow_ui_artifacts.png)
  
+ Finally, you can run this in a Jupyter Notebook: ![Jupyter Notebook]()
+ 
  
 ## 3. Classifying Newswires: a multi-class Keras classification example
 
