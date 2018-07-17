@@ -41,7 +41,9 @@ It will log metrics and parameters in the `mlruns` directory.
 
 Alternatively, you can run using the `mlflow` command.
 
-`mlflow run . -e keras-nn-model -P --drop_rate=0.3 -P --output=128`
+`mflow run . e -keras-nn-model`
+
+`mlflow run . -e keras-nn-model -P drop_rate=0.3 -P output=128`
 
 The next two examples are from [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python?a_aid=keras&a_bid=76564dff).
 While the Jupyter notebooks can be found [here](https://github.com/fchollet/deep-learning-with-python-notebooks), I have modified the code 
