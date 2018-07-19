@@ -1,14 +1,13 @@
 import data_utils_nn
 import model_nn
 import graphs_nn
-import matplotlib
 import os
 import sys
 import mlflow
 
 from time import time
 
-from mlflow import log_metric
+import tensorflow as tf
 
 import argparse
 
@@ -19,7 +18,7 @@ from keras import metrics
 
 def compile_and_fit_model(model, x_train, y_train, epochs=20, batch_size=512, loss=losses.binary_crossentropy,
                           optimizer='rmsprop', lr=0.0001, metrics=metrics.binary_accuracy,
-                          verbose=1):
+                          verbose=1, save_model=0):
     #
     # generate validation data and training data
     #
@@ -35,6 +34,9 @@ def compile_and_fit_model(model, x_train, y_train, epochs=20, batch_size=512, lo
                   loss=loss,
                   metrics=[metrics])
 
+    if save_model:
+        model_dir = get_directory_path("saved_models")
+        keras_to_tensorflow_model(model,model_dir)
     #
     # fit the model: use part of the training data and use validation for unseen data
     #
@@ -46,6 +48,14 @@ def compile_and_fit_model(model, x_train, y_train, epochs=20, batch_size=512, lo
                         validation_data=(x_val, y_val))
 
     return history
+
+def keras_to_tensorflow_model(model, model_dir='/tmp'):
+    """
+    Convert Keras estimator to TensorFlow
+    :type model_dir: object
+    """
+    tf.keras.estimator.model_to_estimator(keras_model=model, model_dir=model_dir)
+
 
 def evaulate_model(model, x_test, y_test):
     """
@@ -94,11 +104,11 @@ def print_metrics(hist):
     print("Final metrics: validation_binary_loss:%6.4f" % val_loss_value)
     print("Final metrics: validation_binary_accuracy:%6.4f" % val_acc_value)
 
-def get_images_directory_path():
+def get_directory_path(dir_name):
 
     cwd = os.getcwd()
 
-    image_dir = os.path.join(cwd, "images")
+    image_dir = os.path.join(cwd, dir_name)
     if not os.path.exists(image_dir):
         os.mkdir(image_dir, mode=0o755)
 
@@ -121,7 +131,7 @@ def train_models(args, base_line=True):
     y_train = data_utils_nn.prepare_vectorized_labels(train_labels)
     y_test = data_utils_nn.prepare_vectorized_labels(test_labels)
 
-    image_dir = get_images_directory_path()
+    image_dir = get_directory_path("images")
 
     graph_label_loss = 'Baseline Model: Training and Validation Loss'
     graph_label_acc = 'Baseline Model: Training and Validation Accuracy'
