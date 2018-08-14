@@ -8,7 +8,7 @@ dependencies:
   - pip:
     - pyarrow
     - mlflow
-    - tensorflow==1.8.0
+    - tensorflow==1.9.0
     - keras
     - matplotlib
     - pyspark
