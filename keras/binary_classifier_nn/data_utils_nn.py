@@ -56,7 +56,7 @@ class KIMDB_Data_Utils():
     def prepare_vectorized_sequences(self, sequences, dimension=10000):
         """
         We cannot feed lists of integers into a neural network. We have to turn our lists into tensors. One way is to convert the sequence
-        into tensors using Numpy. Also, we are gong to use one-hot-encode our lists into vectors of 0s and 1s. That is, for instance turning the sequence
+        into tensors using Numpy. Also, we are going to use one-hot-encode our lists into vectors of 0s and 1s. That is, for instance turning the sequence
         [3, 5] into a 10,000-dimensional vector that would be all-zeros except for indices 3 and 5, which would be ones. Then we could use as first layer in our
         network a Dense layer, capable of handling floating point vector data.
         :param sequences: this is the sequence we want to convert

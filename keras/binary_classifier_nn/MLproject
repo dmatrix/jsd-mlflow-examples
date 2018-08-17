@@ -3,7 +3,7 @@ name: binary-example
 conda_env: conda.yaml
 
 entry_points:
-  binary-nn-model:
+  main:
     parameters:
       hidden_layers: {type: int, default: 1}
       output: {type: int, default: 16}

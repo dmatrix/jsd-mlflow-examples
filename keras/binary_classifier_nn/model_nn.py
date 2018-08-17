@@ -22,7 +22,7 @@ class KModel():
 
         return base_model
 
-    def build_experimental_model(self, hidden_layers=2, output=16, activation='relu'):
+    def build_experimental_model(self, hidden_layers=1, output=16, activation='relu'):
 
         exp_model = models.Sequential()
         # add the input layers
