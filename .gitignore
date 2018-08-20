@@ -1,0 +1,12 @@
+.DS_Store
+.idea/
+images/
+keras/bckerasnn.egg-info/
+keras/bckerasnn/mlruns/
+keras/bckerasnn/models/ 
+keras/dist/
+keras/bckerasnn/__pycache__/*.pyc
+*.pyc
+__pycache__/*.pyc
+mlruns/
+venv/

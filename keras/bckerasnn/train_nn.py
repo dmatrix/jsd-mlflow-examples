@@ -6,14 +6,10 @@ from graphs_nn import KPlot
 import os
 import sys
 import mlflow
+import mlflow.keras
 
 from time import time
-
-import tensorflow as tf
-
-
 from keras import optimizers
-from keras import losses
 from keras import metrics
 
 class KTrain():
@@ -38,10 +34,6 @@ class KTrain():
         model.compile(optimizer=opt,
                       loss=loss,
                       metrics=[metrics])
-
-        if save_model:
-            model_dir = self.get_directory_path("saved_models")
-            self.keras_to_tensorflow_model(model,model_dir)
         #
         # fit the model: use part of the training data and use validation for unseen data
         #
@@ -52,14 +44,19 @@ class KTrain():
                             verbose=verbose,
                             validation_data=(x_val, y_val))
 
+        if save_model:
+            model_dir = self.get_directory_path("keras_models")
+            self.keras_save_model(model, model_dir)
+
         return history
 
-    def keras_to_tensorflow_model(self, model, model_dir='/tmp'):
+    def keras_save_model(self, model, model_dir='/tmp'):
         """
         Convert Keras estimator to TensorFlow
         :type model_dir: object
         """
-        tf.keras.estimator.model_to_estimator(keras_model=model, model_dir=model_dir)
+
+        mlflow.keras.save_model(model, model_dir)
 
 
     def evaulate_model(self,model, x_test, y_test):
@@ -113,11 +110,11 @@ class KTrain():
 
         cwd = os.getcwd()
 
-        image_dir = os.path.join(cwd, dir_name)
-        if not os.path.exists(image_dir):
-            os.mkdir(image_dir, mode=0o755)
+        dir = os.path.join(cwd, dir_name)
+        if not os.path.exists(dir):
+            os.mkdir(dir, mode=0o755)
 
-        return image_dir
+        return dir
 
     def train_models(self, args, base_line=True):
         """
@@ -149,6 +146,7 @@ class KTrain():
         y_test = kdata_cls.prepare_vectorized_labels(test_labels)
 
         image_dir = ktrain_cls.get_directory_path("images")
+        model_dir = ktrain_cls.get_directory_path("models")
 
         graph_label_loss = 'Baseline Model: Training and Validation Loss'
         graph_label_acc = 'Baseline Model: Training and Validation Accuracy'
@@ -206,6 +204,8 @@ class KTrain():
             mlflow.log_metric("average_acc", results[1])
             # log artifacts
             mlflow.log_artifacts(image_dir)
+            # log model
+            mlflow.keras.log_model(model, model_dir)
 
         print("This model took", timed, " seconds to train and test.")
         print("loss function use", args.loss)
