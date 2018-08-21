@@ -3,7 +3,7 @@ name: keras-examples
 conda_env: conda.yaml
 
 entry_points:
-  keras-nn-model:
+  main:
     parameters:
       drop_rate: {type: float, default: 0.5}
       input_dim: {type: int, default: 20}
