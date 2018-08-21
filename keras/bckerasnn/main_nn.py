@@ -1,5 +1,6 @@
 from train_nn import KTrain
 from parser_utils_nn import KParseArgs
+from time import time
 import sys
 
 
@@ -7,6 +8,8 @@ if __name__ == '__main__':
 
     parser = KParseArgs()
     args = parser.parse_args()
+
+    start_time = time()
 
     flag = len(sys.argv) == 1
 
@@ -21,3 +24,7 @@ if __name__ == '__main__':
     print("loss:", args.loss)
 
     train_models_cls = KTrain().train_models(args, flag)
+
+    timed = time() - start_time
+
+    print("This model took", timed, " seconds to train and test.")

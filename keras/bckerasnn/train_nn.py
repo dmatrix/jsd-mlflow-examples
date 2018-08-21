@@ -8,7 +8,6 @@ import sys
 import mlflow
 import mlflow.keras
 
-from time import time
 from keras import optimizers
 from keras import metrics
 
@@ -130,7 +129,6 @@ class KTrain():
         ktrain_cls = KTrain()
         kplot_cls = KPlot()
 
-        start_time = time()
         #
         # get IMDB Data
         #
@@ -187,8 +185,6 @@ class KTrain():
         predictions = model.predict(x_test)
         print(predictions)
 
-        timed = time() - start_time
-
         with mlflow.start_run():
             # log parameters
             mlflow.log_param("hidden_layers", args.hidden_layers)
@@ -207,7 +203,6 @@ class KTrain():
             # log model
             mlflow.keras.log_model(model, "models")
 
-        print("This model took", timed, " seconds to train and test.")
         print("loss function use", args.loss)
 
 if __name__ == '__main__':
@@ -230,6 +225,8 @@ if __name__ == '__main__':
     print("loss:", args.loss)
 
     train_models_cls = KTrain().train_models(args, flag)
+
+
 
 
 
