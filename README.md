@@ -90,7 +90,7 @@ parameters:
  To run the current program with just python and default or supplied parameter and yet log all metrics, use
 the following command:
 
-`cd bckerasnn`
+`cd imdbclassifier`
 
 `python main_nn.py`
 
@@ -105,12 +105,12 @@ It will log metrics and parameters in the `mlruns` directory.
 
 Alternatively, you can run using the `mlflow` command.
 
-**Note**: `mlflow run..` may take longer as it needs to create and setup an environment by and downloand and
+**Note**: `mlflow run..` may take longer as it needs to create and setup an environment by and download and
 installing dependency packages listed in `conda.yml`
 
-`mlflow run . -e binary-nn-model`
+`mlflow run keras/imdbclassifier -e main`
 
-`mlflow run . -e binary-nn-model -P hidden_layers=3 -P output=32 -P epochs=30 -P loss=mse`
+`mlflow run keras/imdbclassifier -e main -P hidden_layers=3 -P output=32 -P epochs=30 -P loss=mse`
 
  To view the output of either runs, launch the mlflow ui:
  
