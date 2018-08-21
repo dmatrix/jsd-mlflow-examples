@@ -5,10 +5,8 @@ dependencies:
   - numpy
   - pandas=0.22.0
   - scikit-learn==0.19.1
+  - matplotlib
+  - keras
+  - tensorflow==1.9.0
   - pip:
-    - pyarrow
     - mlflow
-    - tensorflow==1.9.0
-    - keras
-    - matplotlib
-    - pyspark
