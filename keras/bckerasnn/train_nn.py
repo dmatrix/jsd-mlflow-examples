@@ -203,9 +203,9 @@ class KTrain():
             mlflow.log_metric("average_loss", results[0])
             mlflow.log_metric("average_acc", results[1])
             # log artifacts
-            mlflow.log_artifacts(image_dir)
+            mlflow.log_artifacts(image_dir, "images")
             # log model
-            mlflow.keras.log_model(model, model_dir)
+            mlflow.keras.log_model(model, "models")
 
         print("This model took", timed, " seconds to train and test.")
         print("loss function use", args.loss)
