@@ -81,9 +81,9 @@ parameters:
   
   In both cases, the model will create images for training and validation loss/accuracy images in the images directory
   
-  ![Baseline Loss](./keras/bckerasnn/images/baseline_loss.png)
+  ![Baseline Loss](./keras//images/baseline_loss.png)
   
-  ![Baseline Accuracy](./keras/bckerasnn/images/baseline_accuracy.png)
+  ![Baseline Accuracy](./keras/images/baseline_accuracy.png)
   
  ### How to Use MLflow to Experiment, Log Metrics and Artifacts
  
@@ -119,10 +119,10 @@ installing dependency packages listed in `conda.yml`
  These runs will not only log metrics for loss and accuracy but also log graphs generated from `matplotlib` for 
  perusal as part of visual artifacts.
  
- ![Saved Arficats](./keras/bckerasnn/images/mlflow_ui_artifacts.png)
+ ![Saved Arficats](./keras/imdbclassifier/images/mlflow_ui_artifacts.png)
  
  Finally, you can run this in a Jupyter Notebook: 
- ![Jupyter Notebook](./keras/bckerasnn/keras_binary_nn.ipynb)
+ ![Jupyter Notebook](./keras/imdbclassifier/keras_binary_nn.ipynb)
  
  
 ## 3. Classifying Newswires: a multi-class Keras classification example
