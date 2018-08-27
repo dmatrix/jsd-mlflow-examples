@@ -124,25 +124,9 @@ installing dependency packages listed in `conda.yml`
  Finally, you can run this in a Jupyter Notebook: 
  ![Jupyter Notebook](./keras/imdbclassifier/keras_binary_nn.ipynb)
  
- 
-## 3. Classifying Newswires: a multi-class Keras classification example
+ ### How Visualize TensorFlow Graphs with Tensorboard
 
-This contains the code samples found in Chapter 3, Section 5 of [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python?a_aid=keras&a_bid=76564dff). 
-
-----
-
-In the above model we saw how to classify vector inputs into two mutually exclusive classes using a densely-connected neural network. 
-But what happens when you have more than two classes? 
-
-In this section, we will build a network to classify Reuters newswires into 46 different mutually-exclusive topics. Since we have many 
-classes, this problem is an instance of "multi-class classification", and since each data point should be classified into only one 
-category, the problem is more specifically an instance of "single-label, multi-class classification". If each data point could have 
-belonged to multiple categories (in our case, topics) then we would be facing a "multi-label, multi-class classification" problem.
-
-
-## 4. Visualizing the graph
-
-If you have Tensorboard installed, you can also visualize the TensorFlow session graph created by the `train_models()` within the `train_nn.py`.  For example, after executing the statement `python main_nn.py`, you will see something similar to the following output:
+If you have TensorBoard installed, you can also visualize the TensorFlow session graph created by the `train_models()` within the `train_nn.py`.  For example, after executing the statement `python main_nn.py`, you will see something similar to the following output:
 ```
 Average Probability Results:
 [0.30386349968910215, 0.88336000000000003]
@@ -162,7 +146,7 @@ loss function use binary_crossentropy
 This model took 51.23427104949951  seconds to train and test.
 ```
 
-You can extract the Tensorboard log directory with the line stating `Writing TensorFlow events locally to ...`.  That is, to run Tensorboard, you can run the following command:
+You can extract the TensorBoard log directory with the line stating `Writing TensorFlow events locally to ...`.  That is, to run Tensorboard, you can run the following command:
 
 ```
 tensorboard --logdir=/var/folders/0q/c_zjyddd4hn5j9jkv0jsjvl00000gp/T/tmp7af2qzw4
@@ -171,4 +155,21 @@ tensorboard --logdir=/var/folders/0q/c_zjyddd4hn5j9jkv0jsjvl00000gp/T/tmp7af2qzw
 Click on **graph** and you can visualize and interact with your session graph.
 
 ![Tensorboard visualization](./images/visualize-graph-tensorboard.png)
+
+ 
+ 
+## 3. Classifying Newswires: a multi-class Keras classification example
+
+This contains the code samples found in Chapter 3, Section 5 of [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python?a_aid=keras&a_bid=76564dff). 
+
+----
+
+In the above model we saw how to classify vector inputs into two mutually exclusive classes using a densely-connected neural network. 
+But what happens when you have more than two classes? 
+
+In this section, we will build a network to classify Reuters newswires into 46 different mutually-exclusive topics. Since we have many 
+classes, this problem is an instance of "multi-class classification", and since each data point should be classified into only one 
+category, the problem is more specifically an instance of "single-label, multi-class classification". If each data point could have 
+belonged to multiple categories (in our case, topics) then we would be facing a "multi-label, multi-class classification" problem.
+
 
