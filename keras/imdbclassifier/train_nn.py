@@ -7,6 +7,8 @@ import os
 import sys
 import mlflow
 import mlflow.keras
+import tensorflow as tf
+import tempfile
 
 from keras import optimizers
 from keras import metrics
@@ -121,6 +123,9 @@ class KTrain():
         :param args: command line arguments. If no arguments then use default
         :param base_line: Default flag. Create Baseline model
         """
+        # Create TensorFlow Session
+        sess = tf.InteractiveSession()
+
 
         #
         # initialize some classes
@@ -202,6 +207,12 @@ class KTrain():
             mlflow.log_artifacts(image_dir, "images")
             # log model
             mlflow.keras.log_model(model, "models")
+            # Write out tensorflow graph
+            output_dir = tempfile.mkdtemp()
+            print("Writing TensorFlow events locally to %s\n" % output_dir)
+            writer = tf.summary.FileWriter(output_dir, graph=sess.graph)
+            print("Uploading TensorFlow events as a run artifact.")
+            mlflow.log_artifacts(output_dir, artifact_path="events")
 
         print("loss function use", args.loss)
 

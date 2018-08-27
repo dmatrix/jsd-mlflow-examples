@@ -81,7 +81,7 @@ parameters:
   
   In both cases, the model will create images for training and validation loss/accuracy images in the images directory
   
-  ![Baseline Loss](./keras//images/baseline_loss.png)
+  ![Baseline Loss](./keras/images/baseline_loss.png)
   
   ![Baseline Accuracy](./keras/images/baseline_accuracy.png)
   
@@ -140,4 +140,35 @@ category, the problem is more specifically an instance of "single-label, multi-c
 belonged to multiple categories (in our case, topics) then we would be facing a "multi-label, multi-class classification" problem.
 
 
+## 4. Visualizing the graph
+
+If you have Tensorboard installed, you can also visualize the TensorFlow session graph created by the `train_models()` within the `train_nn.py`.  For example, after executing the statement `python main_nn.py`, you will see something similar to the following output:
+```
+Average Probability Results:
+[0.30386349968910215, 0.88336000000000003]
+
+Predictions Results:
+[[ 0.35428655]
+ [ 0.99231517]
+ [ 0.86375767]
+ ..., 
+ [ 0.15689197]
+ [ 0.24901576]
+ [ 0.4418138 ]]
+Writing TensorFlow events locally to /var/folders/0q/c_zjyddd4hn5j9jkv0jsjvl00000gp/T/tmp7af2qzw4
+
+Uploading TensorFlow events as a run artifact.
+loss function use binary_crossentropy
+This model took 51.23427104949951  seconds to train and test.
+```
+
+You can extract the Tensorboard log directory with the line stating `Writing TensorFlow events locally to ...`.  That is, to run Tensorboard, you can run the following command:
+
+```
+tensorboard --logdir=/var/folders/0q/c_zjyddd4hn5j9jkv0jsjvl00000gp/T/tmp7af2qzw4
+```
+
+Click on **graph** and you can visualize and interact with your session graph.
+
+![Tensorboard visualization](./images/visualize-graph-tensorboard.png)
 
