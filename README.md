@@ -50,6 +50,7 @@ While the Jupyter notebooks can be found [here](https://github.com/fchollet/deep
 to tailor for use with MLflow. The description and experimentation remain the same, hence it fits well with using MLflow to experiment
 various capacity of networks layers and suggested parameters to evaluate the model.
 
+
 ## 2. Classifying Movie Reviews: a Keras binary classification example.
 
 This part comprises of code samples found in Chapter 3, Section 5 of [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python?a_aid=keras&a_bid=76564dff). 
@@ -99,7 +100,11 @@ expand the size of network by providing more `output` to the hidden layers. Or y
 may change the `hidden_layers` or `epochs` or `loss` function — all will alter the loss and 
 accuracy of the network model. For example,
 
-`python main_nn.py --hidden_laysers=3 --output=32 --epochs=30 --loss=mse`
+```
+python main_nn.py  # hidden_layers=1, epochs=20 output=16 loss=binary_crossentropy
+python main_nn.py --hidden_laysers=3 --output=16 --epochs=30 --loss=binary_crossentropy 
+python main_nn.py --hidden_laysers=3 --output=32 --epochs=30 --loss=mse
+```
 
 It will log metrics and parameters in the `mlruns` directory. 
 
