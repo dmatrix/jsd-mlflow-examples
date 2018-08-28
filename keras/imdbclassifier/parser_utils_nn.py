@@ -14,6 +14,7 @@ class KParseArgs():
                             type=int)
         self.parser.add_argument("--loss", help="Number of epochs for training", nargs='?', action='store',
                             default='binary_crossentropy', type=str)
+        self.parser.add_argument("--load_model_path", help="Load model path", nargs='?', action='store', default='/tmp', type=str)
 
     def parse_args(self):
         return self.parser.parse_args()

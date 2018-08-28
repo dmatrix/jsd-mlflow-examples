@@ -129,6 +129,22 @@ installing dependency packages listed in `conda.yml`
  Finally, you can run this in a Jupyter Notebook: 
  ![Jupyter Notebook](./keras/imdbclassifier/keras_binary_nn.ipynb)
  
+ 
+ ### How to Use MLflow to Load Saved Model
+ When executing your test runs, the models used for these runs are also saved via the `mlflow.keras.log_model(model, "models")` within `train_nn.py`.  Once you have found a model that you like, you can re-use your model using MLflow as well.  Your Keras model is saved in HDF5 file format as noted in [MLflow > Models > Keras](https://mlflow.org/docs/latest/models.html#keras-keras).  
+ 
+This model can be loaded back as a `Python Function` as noted noted in [`mlflow.keras`](https://mlflow.org/docs/latest/python_api/mlflow.keras.html#module-mlflow.keras) using `mlflow.keras.load_model(path, run_id=None)`.
+
+To execute this, you load the model you had saved within MLflow by going to the MLflow UI, selecting your run, and copying the path of the stored model as noted in the screenshot below.  
+
+![MLflow UI Copy Model Path](./images/mlflow_ui_load_model.png)
+
+Using the code sample `reload_nn.py`, you can load your saved model and re-run it using the command:
+
+```
+python reload_nn.py --hidden_layers=3 --output=32 --load_model_path='/Users/dennylee/github/jsd-mlflow-examples/keras/imdbclassifier/mlruns/0/55d11810dd3b445dbad501fa01c323d5/artifacts/models'
+```
+ 
  ### How Visualize TensorFlow Graphs with Tensorboard
 
 If you have TensorBoard installed, you can also visualize the TensorFlow session graph created by the `train_models()` within the `train_nn.py`.  For example, after executing the statement `python main_nn.py`, you will see something similar to the following output:
