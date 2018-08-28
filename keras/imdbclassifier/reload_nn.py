@@ -20,6 +20,21 @@ import tempfile
 from keras import optimizers
 from keras import metrics
 
+#
+# Configure external MLflow UI
+#
+
+# Set this variable to your MLflow server's DNS name
+mlflow_server = 'localhost'
+
+# Tracking URI
+mlflow_tracking_URI = 'http://' + mlflow_server + ':5000'
+print ("MLflow Tracking URI: %s" % (mlflow_tracking_URI))
+
+# Import MLflow and set the Tracking UI
+mlflow.set_tracking_uri(mlflow_tracking_URI)
+
+
 class KTrain():
 
     def __init__(self):
@@ -175,6 +190,8 @@ class KTrain():
         # Load model
         print("Loading Model:")
         path = args.load_model_path
+
+
         model = mlflow.keras.load_model(path, run_id=None)
         history = ktrain_cls.compile_and_fit_model(model, x_train, y_train, epochs=args.epochs, loss=model.loss)
 

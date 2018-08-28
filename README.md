@@ -144,8 +144,27 @@ Using the code sample `reload_nn.py`, you can load your saved model and re-run i
 ```
 python reload_nn.py --hidden_layers=3 --output=32 --load_model_path='/Users/dennylee/github/jsd-mlflow-examples/keras/imdbclassifier/mlruns/0/55d11810dd3b445dbad501fa01c323d5/artifacts/models'
 ```
+
+
+### How to run the model
+Now that you have a model, you can type in your own review by loading your model and executing it.  To do this, use the `predict_nn.py` against your model:
+
+```
+python predict_nn.py --load_model_path='/Users/dennylee/github/jsd-mlflow-examples/keras/imdbclassifier/mlruns/0/55d11810dd3b445dbad501fa01c323d5/artifacts/models' --my_review='this is a wonderful film with a great acting, beautiful cinematography, and amazing direction'
+```
+
+The output for this command should be something like:
+```
+Using TensorFlow backend.
+load model path: /tmp/models
+my review: this is a wonderful film with a great acting, beautiful cinematography, and amazing direction
+verbose:  False
+Loading Model...
+Predictions Results:
+[[ 0.69213998]]
+``` 
  
- ### How Visualize TensorFlow Graphs with Tensorboard
+### How Visualize TensorFlow Graphs with Tensorboard
 
 If you have TensorBoard installed, you can also visualize the TensorFlow session graph created by the `train_models()` within the `train_nn.py`.  For example, after executing the statement `python main_nn.py`, you will see something similar to the following output:
 ```
