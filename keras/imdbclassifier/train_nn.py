@@ -61,9 +61,9 @@ class KTrain():
         mlflow.keras.save_model(model, model_dir)
 
 
-    def evaulate_model(self,model, x_test, y_test):
+    def evaluate_model(self,model, x_test, y_test):
         """
-        Evaulate the model with unseen and untrained data
+        Evaluate the model with unseen and untrained data
         :param model:
         :return: results of probability
         """
@@ -178,7 +178,7 @@ class KTrain():
         figure_acc = kplot_cls.plot_accuracy_graph(history, graph_label_acc)
         figure_acc.savefig(graph_image_acc_png)
 
-        results = ktrain_cls.evaulate_model(model, x_test, y_test)
+        results = ktrain_cls.evaluate_model(model, x_test, y_test)
 
         print("Average Probability Results:")
         print(results)
