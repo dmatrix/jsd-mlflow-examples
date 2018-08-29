@@ -102,8 +102,8 @@ accuracy of the network model. For example,
 
 ```
 python main_nn.py  # hidden_layers=1, epochs=20 output=16 loss=binary_crossentropy
-python main_nn.py --hidden_laysers=3 --output=16 --epochs=30 --loss=binary_crossentropy 
-python main_nn.py --hidden_laysers=3 --output=32 --epochs=30 --loss=mse
+python main_nn.py --hidden_layers=3 --output=16 --epochs=30 --loss=binary_crossentropy 
+python main_nn.py --hidden_layers=3 --output=32 --epochs=30 --loss=mse
 ```
 
 It will log metrics and parameters in the `mlruns` directory. 
