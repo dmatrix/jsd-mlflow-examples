@@ -61,9 +61,9 @@ class KTrain():
         mlflow.keras.save_model(model, model_dir)
 
 
-    def evaulate_model(self,model, x_test, y_test):
+    def evaluate_model(self,model, x_test, y_test):
         """
-        Evaulate the model with unseen and untrained data
+        Evaluate the model with unseen and untrained data
         :param model:
         :return: results of probability
         """
@@ -111,10 +111,7 @@ class KTrain():
     def get_directory_path(self, dir_name):
 
         cwd = os.getcwd()
-
         dir = os.path.join(cwd, dir_name)
-        if not os.path.exists(dir):
-            os.mkdir(dir, mode=0o755)
 
         return dir
 
@@ -181,7 +178,7 @@ class KTrain():
         figure_acc = kplot_cls.plot_accuracy_graph(history, graph_label_acc)
         figure_acc.savefig(graph_image_acc_png)
 
-        results = ktrain_cls.evaulate_model(model, x_test, y_test)
+        results = ktrain_cls.evaluate_model(model, x_test, y_test)
 
         print("Average Probability Results:")
         print(results)
