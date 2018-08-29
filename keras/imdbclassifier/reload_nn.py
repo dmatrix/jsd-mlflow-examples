@@ -1,3 +1,9 @@
+#
+# reload_nn.py
+#    Reloads the model you had created and executes it
+#    Based on main_nn.py
+#
+
 from data_utils_nn import KIMDB_Data_Utils
 from model_nn import KModel
 from parser_utils_nn import KParseArgs
@@ -10,8 +16,24 @@ import mlflow.keras
 import tensorflow as tf
 import tempfile
 
+
 from keras import optimizers
 from keras import metrics
+
+#
+# Configure external MLflow UI
+#
+
+# Set this variable to your MLflow server's DNS name
+mlflow_server = 'localhost'
+
+# Tracking URI
+mlflow_tracking_URI = 'http://' + mlflow_server + ':5000'
+print ("MLflow Tracking URI: %s" % (mlflow_tracking_URI))
+
+# Import MLflow and set the Tracking UI
+mlflow.set_tracking_uri(mlflow_tracking_URI)
+
 
 class KTrain():
 
@@ -164,14 +186,15 @@ class KTrain():
             graph_image_acc_png = os.path.join(image_dir,'experimental_accuracy.png')
 
         kmodel = KModel()
-        if base_line:
-            print("Baseline Model:")
-            model = kmodel.build_basic_model()
-        else:
-            print("Experiment Model:")
-            model = kmodel.build_experimental_model(args.hidden_layers, args.output)
 
-        history = ktrain_cls.compile_and_fit_model(model, x_train, y_train, epochs=args.epochs, loss=args.loss)
+        # Load model
+        print("Loading Model:")
+        path = args.load_model_path
+
+
+        model = mlflow.keras.load_model(path, run_id=None)
+        history = ktrain_cls.compile_and_fit_model(model, x_train, y_train, epochs=args.epochs, loss=model.loss)
+
         model.summary()
         ktrain_cls.print_metrics(history)
 
@@ -196,7 +219,7 @@ class KTrain():
             mlflow.log_param("hidden_layers", args.hidden_layers)
             mlflow.log_param("output", args.output)
             mlflow.log_param("epochs", args.epochs)
-            mlflow.log_param("loss_function", args.loss)
+            mlflow.log_param("loss_function", model.loss)
             # log metrics
             mlflow.log_metric("binary_loss", ktrain_cls.get_binary_loss(history))
             mlflow.log_metric("binary_acc",  ktrain_cls.get_binary_acc(history))
@@ -215,7 +238,7 @@ class KTrain():
             print("Uploading TensorFlow events as a run artifact.")
             mlflow.log_artifacts(output_dir, artifact_path="events")
 
-        print("loss function use", args.loss)
+        print("loss function use", model.loss)
 
 if __name__ == '__main__':
     #
@@ -226,15 +249,11 @@ if __name__ == '__main__':
 
     flag = len(sys.argv) == 1
 
-    if flag:
-        print("Using Default Baseline parameters")
-    else:
-        print("Using Experimental parameters")
 
     print("hidden_layers:", args.hidden_layers)
     print("output:", args.output)
     print("epochs:", args.epochs)
-    print("loss:", args.loss)
+    print("load model path:", args.load_model_path)
 
     train_models_cls = KTrain().train_models(args, flag)
 

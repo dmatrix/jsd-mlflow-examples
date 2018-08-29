@@ -50,6 +50,7 @@ While the Jupyter notebooks can be found [here](https://github.com/fchollet/deep
 to tailor for use with MLflow. The description and experimentation remain the same, hence it fits well with using MLflow to experiment
 various capacity of networks layers and suggested parameters to evaluate the model.
 
+
 ## 2. Classifying Movie Reviews: a Keras binary classification example.
 
 This part comprises of code samples found in Chapter 3, Section 5 of [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python?a_aid=keras&a_bid=76564dff). 
@@ -99,7 +100,11 @@ expand the size of network by providing more `output` to the hidden layers. Or y
 may change the `hidden_layers` or `epochs` or `loss` function — all will alter the loss and 
 accuracy of the network model. For example,
 
-`python main_nn.py --hidden_laysers=3 --output=32 --epochs=30 --loss=mse`
+```
+python main_nn.py  # hidden_layers=1, epochs=20 output=16 loss=binary_crossentropy
+python main_nn.py --hidden_layers=3 --output=16 --epochs=30 --loss=binary_crossentropy 
+python main_nn.py --hidden_layers=3 --output=32 --epochs=30 --loss=mse
+```
 
 It will log metrics and parameters in the `mlruns` directory. 
 
@@ -124,7 +129,42 @@ installing dependency packages listed in `conda.yml`
  Finally, you can run this in a Jupyter Notebook: 
  ![Jupyter Notebook](./keras/imdbclassifier/keras_binary_nn.ipynb)
  
- ### How Visualize TensorFlow Graphs with Tensorboard
+ 
+ ### How to Use MLflow to Load Saved Model
+ When executing your test runs, the models used for these runs are also saved via the `mlflow.keras.log_model(model, "models")` within `train_nn.py`.  Once you have found a model that you like, you can re-use your model using MLflow as well.  Your Keras model is saved in HDF5 file format as noted in [MLflow > Models > Keras](https://mlflow.org/docs/latest/models.html#keras-keras).  
+ 
+This model can be loaded back as a `Python Function` as noted noted in [`mlflow.keras`](https://mlflow.org/docs/latest/python_api/mlflow.keras.html#module-mlflow.keras) using `mlflow.keras.load_model(path, run_id=None)`.
+
+To execute this, you load the model you had saved within MLflow by going to the MLflow UI, selecting your run, and copying the path of the stored model as noted in the screenshot below.  
+
+![MLflow UI Copy Model Path](./images/mlflow_ui_load_model.png)
+
+Using the code sample `reload_nn.py`, you can load your saved model and re-run it using the command:
+
+```
+python reload_nn.py --hidden_layers=3 --output=32 --load_model_path='/Users/dennylee/github/jsd-mlflow-examples/keras/imdbclassifier/mlruns/0/55d11810dd3b445dbad501fa01c323d5/artifacts/models'
+```
+
+
+### How to run the model
+Now that you have a model, you can type in your own review by loading your model and executing it.  To do this, use the `predict_nn.py` against your model:
+
+```
+python predict_nn.py --load_model_path='/Users/dennylee/github/jsd-mlflow-examples/keras/imdbclassifier/mlruns/0/55d11810dd3b445dbad501fa01c323d5/artifacts/models' --my_review='this is a wonderful film with a great acting, beautiful cinematography, and amazing direction'
+```
+
+The output for this command should be something like:
+```
+Using TensorFlow backend.
+load model path: /tmp/models
+my review: this is a wonderful film with a great acting, beautiful cinematography, and amazing direction
+verbose:  False
+Loading Model...
+Predictions Results:
+[[ 0.69213998]]
+``` 
+ 
+### How Visualize TensorFlow Graphs with Tensorboard
 
 If you have TensorBoard installed, you can also visualize the TensorFlow session graph created by the `train_models()` within the `train_nn.py`.  For example, after executing the statement `python main_nn.py`, you will see something similar to the following output:
 ```
