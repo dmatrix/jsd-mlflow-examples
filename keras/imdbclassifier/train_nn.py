@@ -111,10 +111,7 @@ class KTrain():
     def get_directory_path(self, dir_name):
 
         cwd = os.getcwd()
-
         dir = os.path.join(cwd, dir_name)
-        if not os.path.exists(dir):
-            os.mkdir(dir, mode=0o755)
 
         return dir
 
