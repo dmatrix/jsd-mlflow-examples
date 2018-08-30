@@ -43,14 +43,14 @@ class KPredict():
                 # We encode the review; note that our indices were offset by 3
                 # because 0, 1 and 2 are reserved indices for "padding", "start of sequence", and "unknown".
                 value_index = value_index + 3
-                if flagVerbose:
+                if (flagVerbose == 1):
                     print("j: %s, word: %s, imdb_word_index: %s" % (j, value, value_index))
 
                 # Create review index
                 myReviewIdx.insert(j, value_index)
 
         # View my review index
-        if flagVerbose:
+        if (flagVerbose == 1):
             print("\n myReviewIdx: %s" % myReviewIdx)
 
         # OHE the sequence
@@ -58,13 +58,14 @@ class KPredict():
         myVectorizedSeq[0, myReviewIdx] = 1.
 
         # View my vectorized sequence
-        if flagVerbose:
+        if (flagVerbose == 1):
             print("\n myVectorizedSeq: %s" % myVectorizedSeq)
 
         # Load model
         print("Loading Model...")
         path = args.load_model_path
-        model = mlflow.keras.load_model(path, run_id=None)
+        run_uuid=args.run_uuid
+        model = mlflow.keras.load_model(path, run_id=run_uuid)
 
         # Print out predictions
         print("Predictions Results:")
@@ -84,6 +85,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     print("load model path:", args.load_model_path)
+    print("run_uuid: ", args.run_uuid)
     print("my review:", args.my_review)
     print("verbose: ", args.verbose)
 
