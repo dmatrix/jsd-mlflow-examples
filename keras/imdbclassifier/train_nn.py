@@ -48,7 +48,6 @@ class KTrain():
         if save_model:
             model_dir = self.get_directory_path("keras_models")
             self.keras_save_model(model, model_dir)
-            print("Model is saved to %s" % model_dir)
 
         return history
 
@@ -57,7 +56,7 @@ class KTrain():
         Convert Keras estimator to TensorFlow
         :type model_dir: object
         """
-
+        print("Model is saved locally to %s" % model_dir)
         mlflow.keras.save_model(model, model_dir)
 
 
@@ -108,10 +107,13 @@ class KTrain():
         print("Final metrics: validation_binary_loss:%6.4f" % val_loss_value)
         print("Final metrics: validation_binary_accuracy:%6.4f" % val_acc_value)
 
-    def get_directory_path(self, dir_name):
+    def get_directory_path(self, dir_name, create_dir=True):
 
         cwd = os.getcwd()
         dir = os.path.join(cwd, dir_name)
+        if create_dir:
+            if not os.path.exists(dir):
+                os.mkdir(dir, mode=0o755)
 
         return dir
 
@@ -189,11 +191,16 @@ class KTrain():
         print(predictions)
 
         with mlflow.start_run():
+            # print out current run_uuid
+            run_uuid = mlflow.active_run().info.run_uuid
+            print("MLflow Run ID: %s" % run_uuid)
+
             # log parameters
             mlflow.log_param("hidden_layers", args.hidden_layers)
             mlflow.log_param("output", args.output)
             mlflow.log_param("epochs", args.epochs)
             mlflow.log_param("loss_function", args.loss)
+
             # log metrics
             mlflow.log_metric("binary_loss", ktrain_cls.get_binary_loss(history))
             mlflow.log_metric("binary_acc",  ktrain_cls.get_binary_acc(history))
@@ -201,10 +208,18 @@ class KTrain():
             mlflow.log_metric("validation_acc", ktrain_cls.get_validation_acc(history))
             mlflow.log_metric("average_loss", results[0])
             mlflow.log_metric("average_acc", results[1])
+
             # log artifacts
             mlflow.log_artifacts(image_dir, "images")
+
             # log model
             mlflow.keras.log_model(model, "models")
+
+            # save model locally
+            pathdir = "keras_models/" + run_uuid
+            model_dir = self.get_directory_path(pathdir, False)
+            ktrain_cls.keras_save_model(model, model_dir)
+
             # Write out tensorflow graph
             output_dir = tempfile.mkdtemp()
             print("Writing TensorFlow events locally to %s\n" % output_dir)
