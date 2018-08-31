@@ -194,7 +194,7 @@ tensorboard --logdir=/var/folders/0q/c_zjyddd4hn5j9jkv0jsjvl00000gp/T/tmp7af2qzw
 
 Click on **graph** and you can visualize and interact with your session graph.
 
-![Tensorboard visualization](./images/visualize-graph-tensorboard.png)
+![Tensorboard visualization](./images/visualize-graph-tensorboard-animated.gif)
 
  
  
