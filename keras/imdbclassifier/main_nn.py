@@ -2,7 +2,10 @@ from train_nn import KTrain
 from parser_utils_nn import KParseArgs
 from time import time
 import sys
+import os
 
+# Hide warning messages
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 if __name__ == '__main__':
 

@@ -12,6 +12,8 @@ import tempfile
 
 from keras import optimizers
 from keras import metrics
+from keras.callbacks import TensorBoard
+
 
 class KTrain():
 
@@ -20,7 +22,7 @@ class KTrain():
 
     def compile_and_fit_model(self, model, x_train, y_train, epochs=20, batch_size=512, loss='binary_crossentropy',
                               optimizer='rmsprop', lr=0.0001, metrics=metrics.binary_accuracy,
-                              verbose=1, save_model=0):
+                              verbose=1, save_model=0, output_dir='/tmp'):
         #
         # generate validation data and training data
         #
@@ -28,22 +30,29 @@ class KTrain():
         partial_x_train = x_train[10000:]
 
         y_val = y_train[:10000]
-        partail_y_train = y_train[10000:]
+        partial_y_train = y_train[10000:]
 
         if optimizer == 'rmsprop':
             opt = optimizers.RMSprop(lr=lr)
         model.compile(optimizer=opt,
                       loss=loss,
                       metrics=[metrics])
+
+        # Configure for TensorBoard visualization
+        #   Reference: [Monitor progress of your Keras based neural network using Tensorboard](https://bit.ly/2C36EBJ)
+        print("Writing TensorFlow events locally to %s\n" % output_dir)
+        tensorboard = TensorBoard(log_dir=output_dir)
+
         #
         # fit the model: use part of the training data and use validation for unseen data
         #
         history = model.fit(partial_x_train,
-                            partail_y_train,
+                            partial_y_train,
                             epochs=epochs,
                             batch_size=batch_size,
                             verbose=verbose,
-                            validation_data=(x_val, y_val))
+                            validation_data=(x_val, y_val),
+                            callbacks=[tensorboard])
 
         if save_model:
             model_dir = self.get_directory_path("keras_models")
@@ -107,6 +116,7 @@ class KTrain():
         print("Final metrics: validation_binary_loss:%6.4f" % val_loss_value)
         print("Final metrics: validation_binary_accuracy:%6.4f" % val_acc_value)
 
+
     def get_directory_path(self, dir_name, create_dir=True):
 
         cwd = os.getcwd()
@@ -126,6 +136,8 @@ class KTrain():
         # Create TensorFlow Session
         sess = tf.InteractiveSession()
 
+        # Configure output_dir
+        output_dir = tempfile.mkdtemp()
 
         #
         # initialize some classes
@@ -170,21 +182,16 @@ class KTrain():
             print("Experiment Model:")
             model = kmodel.build_experimental_model(args.hidden_layers, args.output)
 
-        history = ktrain_cls.compile_and_fit_model(model, x_train, y_train, epochs=args.epochs, loss=args.loss)
+        history = ktrain_cls.compile_and_fit_model(model, x_train, y_train, epochs=args.epochs, loss=args.loss, output_dir=output_dir)
         model.summary()
         ktrain_cls.print_metrics(history)
-
         figure_loss = kplot_cls.plot_loss_graph(history, graph_label_loss)
         figure_loss.savefig(graph_image_loss_png )
-
         figure_acc = kplot_cls.plot_accuracy_graph(history, graph_label_acc)
         figure_acc.savefig(graph_image_acc_png)
-
         results = ktrain_cls.evaluate_model(model, x_test, y_test)
-
         print("Average Probability Results:")
         print(results)
-
         print()
         print("Predictions Results:")
         predictions = model.predict(x_test)
@@ -201,13 +208,21 @@ class KTrain():
             mlflow.log_param("epochs", args.epochs)
             mlflow.log_param("loss_function", args.loss)
 
+            # calculate metrics
+            binary_loss = ktrain_cls.get_binary_loss(history)
+            binary_acc = ktrain_cls.get_binary_acc(history)
+            validation_loss = ktrain_cls.get_validation_loss(history)
+            validation_acc = ktrain_cls.get_validation_acc(history)
+            average_loss = results[0]
+            average_acc = results[1]
+
             # log metrics
-            mlflow.log_metric("binary_loss", ktrain_cls.get_binary_loss(history))
-            mlflow.log_metric("binary_acc",  ktrain_cls.get_binary_acc(history))
-            mlflow.log_metric("validation_loss", ktrain_cls.get_binary_loss(history))
-            mlflow.log_metric("validation_acc", ktrain_cls.get_validation_acc(history))
-            mlflow.log_metric("average_loss", results[0])
-            mlflow.log_metric("average_acc", results[1])
+            mlflow.log_metric("binary_loss", binary_loss)
+            mlflow.log_metric("binary_acc", binary_acc)
+            mlflow.log_metric("validation_loss", validation_loss)
+            mlflow.log_metric("validation_acc", validation_acc)
+            mlflow.log_metric("average_loss", average_loss)
+            mlflow.log_metric("average_acc", average_acc)
 
             # log artifacts
             mlflow.log_artifacts(image_dir, "images")
@@ -220,14 +235,13 @@ class KTrain():
             model_dir = self.get_directory_path(pathdir, False)
             ktrain_cls.keras_save_model(model, model_dir)
 
-            # Write out tensorflow graph
-            output_dir = tempfile.mkdtemp()
-            print("Writing TensorFlow events locally to %s\n" % output_dir)
-            writer = tf.summary.FileWriter(output_dir, graph=sess.graph)
+            # Write out TensorFlow events as a run artifact
             print("Uploading TensorFlow events as a run artifact.")
             mlflow.log_artifacts(output_dir, artifact_path="events")
 
         print("loss function use", args.loss)
+
+
 
 if __name__ == '__main__':
     #
@@ -249,7 +263,6 @@ if __name__ == '__main__':
     print("loss:", args.loss)
 
     train_models_cls = KTrain().train_models(args, flag)
-
 
 
 
