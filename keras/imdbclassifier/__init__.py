@@ -1,1 +1,1 @@
-__all__ = ['data_utils_nn', 'model_nn', 'graphs_nn', 'train_nn', 'parser_utils_nn']
+__all__ = ['data_utils_nn', 'model_nn', 'graphs_nn', 'train_nn', 'predict_nn','parser_utils_nn']

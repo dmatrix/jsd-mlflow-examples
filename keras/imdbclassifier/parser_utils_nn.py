@@ -18,6 +18,7 @@ class KParseArgs():
         self.parser.add_argument("--my_review", help="Type in your review", nargs='?', action='store', default='this film was horrible, bad acting, even worse direction', type=str)
         self.parser.add_argument("--verbose", help="Verbose output", nargs='?', action='store', default=0, type=int)
         self.parser.add_argument("--run_uuid", help="Specify the MLflow Run ID", nargs='?', action='store', default=None, type=str)
+        self.parser.add_argument("--tracking_server", help="Specify the MLflow Tracking Server", nargs='?', action='store', default=None, type=str)
 
     def parse_args(self):
         return self.parser.parse_args()
@@ -37,6 +38,6 @@ if __name__ == '__main__':
     args = parser.parse_args_list([])
     print(args)
 
-    args = parser.parse_args_list(['--hidden_layers', '3', '--epochs', '10', '--output', '32', '--loss', 'mse'])
+    args = parser.parse_args_list(['--hidden_layers', '3', '--epochs', '10', '--output', '32', '--loss', 'mse', '--tracking_server', '123.45.6.8:8000'])
     args = parser.parse_args()
     print(args)

@@ -18,6 +18,7 @@ __pycache__
 build/
 develop-eggs/
 dist/
+keras_models/
 downloads/
 eggs/
 .eggs/
