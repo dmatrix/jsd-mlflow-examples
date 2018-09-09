@@ -144,6 +144,9 @@ Using the code sample `reload_nn.py`, you can load your saved model and re-run i
 ```
 python reload_nn.py --hidden_layers=3 --output=32 --load_model_path='/Users/dennylee/github/jsd-mlflow-examples/keras/imdbclassifier/mlruns/0/55d11810dd3b445dbad501fa01c323d5/artifacts/models'
 ```
+```
+mlflow run keras/imdbclassifier -e reload -P output=4 -P load_model_path=/Users/jules/jsd-mlflow-examples/keras/imdbclassifier/keras_models/178f1d25c4614b34a50fbf025ad6f18a
+```
 
 
 ### How to run the model
@@ -151,6 +154,10 @@ Now that you have a model, you can type in your own review by loading your model
 
 ```
 python predict_nn.py --load_model_path='/Users/dennylee/github/jsd-mlflow-examples/keras/imdbclassifier/mlruns/0/55d11810dd3b445dbad501fa01c323d5/artifacts/models' --my_review='this is a wonderful film with a great acting, beautiful cinematography, and amazing direction'
+```
+
+```
+mlflow run keras/imdbclassifier -e predict -P load_model_path='/Users/jules/jsd-mlflow-examples/keras/imdbclassifier/keras_models/178f1d25c4614b34a50fbf025ad6f18a' -P my_review='this is a wonderful film with a great acting, beautiful cinematography, and amazing direction'
 ```
 
 The output for this command should be something like:
@@ -164,7 +171,7 @@ Predictions Results:
 [[ 0.69213998]]
 ``` 
  
-### How Visualize TensorFlow Graphs with Tensorboard
+### How Visualize TensorFlow Graphs with TensorBoard
 
 If you have TensorBoard installed, you can also visualize the TensorFlow session graph created by the `train_models()` within the `train_nn.py`.  For example, after executing the statement `python main_nn.py`, you will see something similar to the following output:
 ```

@@ -199,16 +199,16 @@ class KTrain():
 
         mlflow_server = args.tracking_server
         #
-        # if we don't want to force people to have tracking server
+        # We don't want to force people to have tracking server
         # running on localhost as it tracks in mlruns directory
-        if (mlflow_server):
+        if mlflow_server:
             # Tracking URI
-            mlflow_tracking_URI = 'http://' + mlflow_server + ':5000'
-            print("MLflow Tracking URI: %s" % (mlflow_tracking_URI))
+            mlflow_tracking_uri = 'http://' + mlflow_server + ':5000'
+            print("MLflow Tracking URI: %s" % mlflow_tracking_uri)
             # Set the Tracking UI
-            mlflow.set_tracking_uri(mlflow_tracking_URI)
+            mlflow.set_tracking_uri(mlflow_tracking_uri)
         else:
-            print("MLflow Tracking URI: %s" % ("local directory 'mlruns'"))
+            print("MLflow Tracking URI: %s" % "local directory 'mlruns'")
 
         with mlflow.start_run():
             # print out current run_uuid
