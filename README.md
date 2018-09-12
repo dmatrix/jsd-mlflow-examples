@@ -78,7 +78,7 @@ parameters:
   * Use 2 or more hidden layers
   * Use 4, 8, 12 or 16 epochs
   * Try hidden layers with output 32, 64 or 128 and see if that affects the metrics
-  * Try to use the `mse` loss function instead of `binar_crossentropy`.
+  * Try to use the `mse` loss function instead of `binary_crossentropy`.
   
   In both cases, the model will create images for training and validation loss/accuracy images in the images directory
   
@@ -148,6 +148,51 @@ python reload_nn.py --hidden_layers=3 --output=32 --load_model_path='/Users/denn
 mlflow run keras/imdbclassifier -e reload -P output=4 -P load_model_path=/Users/jules/jsd-mlflow-examples/keras/imdbclassifier/keras_models/178f1d25c4614b34a50fbf025ad6f18a
 ```
 
+### How to Reproduce a Run or an Experiment
+As part of machine development life cycle, reproducibility of any experiment by team members or ML developers is imperative. Often you will want to either retrain or reproduce a run from several past experiments to reproduce the results for sanity or audibility.
+
+One way is to manually read the parameter from the MLflow UI for a particular `run_uuid` and rerun using `main_nn.py or reload_rn.py,` with the original parameters arguments.
+
+Another preferred way is to simply use `run_uuid`, and use it with `reproduce_nn.py.` This command will fetch all the right hyper-parameters used for training the model and will recreate or reproduce 
+the experiment, including building, training, and evaluating the model. To see the code how the new [Python tracking and experimental APIs](https://mlflow.org/docs/latest/python_api/mlflow.tracking.html) are used, read the source `reproduce_nn.py.`
+
+You can run these either of two ways:
+
+```
+python reproduce_run_nn.py --run_uuid=7261d8f5ae5045d4ba16f9de58bcda2a
+python reproduce_run_nn.py --run_uuid=7261d8f5ae5045d4ba16f9de58bcda2a [--tracking_server=URI]
+```
+Or
+
+```
+mlflow run keras/imdbclassifier -e reproduce -P run_uuid=7261d8f5ae5045d4ba16f9de58bcda2a
+mlflow run keras/imdbclassifier -e reproduce -P run_uuid=7261d8f5ae5045d4ba16f9de58bcda2a [--tracking_server=URI]
+```
+The output from the above runs. By default the `tracking_server` defaults to
+the local 'mlruns' directory.
+...
+
+The output from the above runs. By default the `tracking_server` defaults to
+the local 'mlruns' directory.
+```
+...
+Using TensorFlow backend.
+run_uuid: 5374ba7655ad44e1bc50729862b25419
+hidden_layers: 4
+output: 4
+epochs: 25
+loss: mse
+load model path: /tmp
+tracking server: None
+2018-09-12 10:25:24.378576: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+Experiment Model:
+Writing TensorFlow events locally to /var/folders/b7/01tptb954h5_x87n054hg8hw0000gn/T/tmpiva13sry
+
+Train on 15000 samples, validate on 10000 samples
+Epoch 1/25
+15000/15000 [==============================] - 3s 189us/step - loss: 0.2497 - binary_accuracy: 0.5070 - val_loss: 0.2491 - val_binary_accuracy: 0.4947
+...
+```
 
 ### How to run the model
 Now that you have a model, you can type in your own review by loading your model and executing it.  To do this, use the `predict_nn.py` against your model:
