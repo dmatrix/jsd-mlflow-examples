@@ -12,7 +12,7 @@ class KParseArgs():
                             type=int)
         self.parser.add_argument("--epochs", help="Number of epochs for training", nargs='?', action='store', default=20,
                             type=int)
-        self.parser.add_argument("--loss", help="Number of epochs for training", nargs='?', action='store',
+        self.parser.add_argument("--loss", help="Loss Function for the Gradients", nargs='?', action='store',
                             default='binary_crossentropy', type=str)
         self.parser.add_argument("--load_model_path", help="Load model path", nargs='?', action='store', default='/tmp', type=str)
         self.parser.add_argument("--my_review", help="Type in your review", nargs='?', action='store', default='this film was horrible, bad acting, even worse direction', type=str)
@@ -33,11 +33,11 @@ if __name__ == '__main__':
     parser = KParseArgs()
     args = parser.parse_args()
 
+    print ("====default args====:")
     print(args)
-
+    print ("----empty list (default args)-----")
     args = parser.parse_args_list([])
     print(args)
-
-    args = parser.parse_args_list(['--hidden_layers', '3', '--epochs', '10', '--output', '32', '--loss', 'mse', '--tracking_server', '123.45.6.8:8000'])
-    args = parser.parse_args()
+    print("+++++default + list of args+++++")
+    args = parser.parse_args_list(['--hidden_layers', '3', '--epochs', '10', '--output', '32', '--loss', 'mse', '--tracking_server', '123.45.6.8'])
     print(args)

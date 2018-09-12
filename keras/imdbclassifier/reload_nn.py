@@ -7,7 +7,6 @@
 from train_nn import KTrain
 from parser_utils_nn import KParseArgs
 
-import mlflow.keras
 import sys
 
 class KReload(KTrain):
@@ -30,10 +29,12 @@ if __name__ == '__main__':
     print("hidden_layers:", args.hidden_layers)
     print("output:", args.output)
     print("epochs:", args.epochs)
+    print("loss_function:", args.loss)
     print("load model path:", args.load_model_path)
     print("tracking server:", args.tracking_server)
 
     KReload().train_models(args, flag)
+
 
 
 
