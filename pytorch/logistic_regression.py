@@ -2,7 +2,7 @@ import torch
 from torch.autograd import Variable
 import torch.nn.functional as F
 
-# X data
+# X data for training
 x_data = Variable(torch.Tensor([[1.0], [2.0], [3.0], [4.0]]))
 # Y data with its expected value: labels
 y_data = Variable(torch.Tensor([[0.], [0.], [1.], [1.]]))
@@ -50,7 +50,6 @@ for epoch in range(1000):
     optimizer.step()
 
 # After training
-hour_var = Variable(torch.Tensor([[1.0]]))
-print("predict 1 hour ", 1.0, model(hour_var).data[0][0] > 0.5)
-hour_var = Variable(torch.Tensor([[7.0]]))
-print("predict 7 hours", 7.0, model(hour_var).data[0][0] > 0.5)
+for hv in [4.0, 2.0, 1.0, 5.0, 6.0, 7.0]:
+    hour_var = Variable(torch.Tensor([[hv]]))
+    print("predict hours worked: ", hv, model(hour_var).data[0][0] > 0.5)
