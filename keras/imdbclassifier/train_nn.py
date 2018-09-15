@@ -203,10 +203,13 @@ class KTrain():
         # running on localhost as it tracks in mlruns directory
         if mlflow_server:
             # Tracking URI
-            mlflow_tracking_uri = 'http://' + mlflow_server + ':5000'
-            print("MLflow Tracking URI: %s" % mlflow_tracking_uri)
-            # Set the Tracking UI
+            if not mlflow_server.startswith("http"):
+                mlflow_tracking_uri = 'http://' + mlflow_server + ':5000'
+            else:
+                mlflow_tracking_uri = mlflow_server
+            # Set the Tracking URI
             mlflow.set_tracking_uri(mlflow_tracking_uri)
+            print("MLflow Tracking URI: %s" % mlflow_tracking_uri)
         else:
             print("MLflow Tracking URI: %s" % "local directory 'mlruns'")
 
