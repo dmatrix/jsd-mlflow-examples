@@ -4,8 +4,8 @@
 #    Based on main_nn.py
 #
 
-from train_nn import KTrain
-from parser_utils_nn import KParseArgs
+from imdbclassifier.train_nn import KTrain
+from imdbclassifier.parser_utils_nn import KParseArgs
 
 import sys
 

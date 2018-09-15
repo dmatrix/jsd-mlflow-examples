@@ -5,8 +5,8 @@
 #    with all the parameters used from previous experiments.
 #
 
-from train_nn import KTrain
-from parser_utils_nn import KParseArgs
+from imdbclassifier.train_nn import KTrain
+from imdbclassifier.parser_utils_nn import KParseArgs
 import mlflow.tracking
 
 import sys
@@ -21,13 +21,13 @@ class KReproduce(KTrain):
 
     def get_run_data(self, run_uuid, tracking_uri=None):
         client = mlflow.tracking.MlflowClient(tracking_uri)
-        run_entries= client.get_run(run_uuid)
+        run_entries = client.get_run(run_uuid)
         run_data = run_entries.data
         return run_data
 
     def build_run_args_list(self, run_data):
         a_list = []
-        for p in data.params:
+        for p in run_data.params:
             if p.key == 'loss_function':
                 a_list.append('--loss')
             else:

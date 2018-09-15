@@ -1,7 +1,7 @@
-from data_utils_nn import KIMDB_Data_Utils
-from model_nn import KModel
-from parser_utils_nn import KParseArgs
-from graphs_nn import KPlot
+from imdbclassifier.data_utils_nn import KIMDB_Data_Utils
+from imdbclassifier.model_nn import KModel
+from imdbclassifier.parser_utils_nn import KParseArgs
+from imdbclassifier.graphs_nn import KPlot
 
 import os
 import sys

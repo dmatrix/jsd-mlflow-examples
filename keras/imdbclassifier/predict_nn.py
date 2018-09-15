@@ -4,7 +4,7 @@
 #    Based on main_nn.py
 #
 
-from parser_utils_nn import KParseArgs
+from imdbclassifier.parser_utils_nn import KParseArgs
 
 import mlflow
 import mlflow.keras
