@@ -95,6 +95,8 @@ the following command:
 
 `python main_nn.py`
 
+**Note**: You will need to do `pip install imdbclassifier`
+
 To experiment different runs, with different parameters suggested above, and evaluate new metrics, you can alter the arguments. For example, 
 expand the size of network by providing more `output` to the hidden layers. Or you 
 may change the `hidden_layers` or `epochs` or `loss` function — all will alter the loss and 
