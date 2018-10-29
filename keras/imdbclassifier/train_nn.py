@@ -136,6 +136,7 @@ class KTrain():
         # Create TensorFlow Session
         sess = tf.InteractiveSession()
 
+
         # Configure output_dir
         output_dir = tempfile.mkdtemp()
 
@@ -254,9 +255,12 @@ class KTrain():
             # Write out TensorFlow events as a run artifact
             print("Uploading TensorFlow events as a run artifact.")
             mlflow.log_artifacts(output_dir, artifact_path="events")
+            mlflow.end_run()
+
+        # terminate sessions
+        sess.close()
 
         print("loss function use", args.loss)
-
 
 
 if __name__ == '__main__':

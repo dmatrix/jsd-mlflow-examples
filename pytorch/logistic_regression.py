@@ -53,3 +53,5 @@ for epoch in range(1000):
 for hv in [4.0, 2.0, 1.0, 5.0, 6.0, 7.0]:
     hour_var = Variable(torch.Tensor([[hv]]))
     print("predict hours worked: ", hv, model(hour_var).data[0][0] > 0.5)
+
+print(model.state_dict())
