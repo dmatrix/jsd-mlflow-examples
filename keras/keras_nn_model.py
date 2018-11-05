@@ -65,13 +65,6 @@ def compile_and_run_model(mdl, train_data, epochs=20, batch_size=128):
 
 if __name__ == '__main__':
 
-    drop_rate = 0.5
-    input_dim = 20
-    bs = 1000
-    output = 64
-    epochs = 20
-    batch_size = 128
-
     parser = argparse.ArgumentParser()
     parser.add_argument("--drop_rate", help="Drop rate", nargs='?', action='store', default=0.5, type=float)
     parser.add_argument("--input_dim", help="Input dimension for the network.", action='store', nargs='?', default=20, type=int)
@@ -81,6 +74,14 @@ if __name__ == '__main__':
     parser.add_argument("--epochs", help="Number of epochs for training", nargs='?', action='store', default=20, type=int)
 
     args = parser.parse_args()
+
+    drop_rate = args.drop_rate
+    input_dim = args.input_dim
+    bs = args.bs
+    output = args.output
+    epochs = args.epochs
+    batch_size = args.train_batch_size
+
     print("drop_rate", args.drop_rate)
     print("input_dim", args.input_dim)
     print("size", args.bs)
@@ -88,8 +89,8 @@ if __name__ == '__main__':
     print("train_batch_size", args.train_batch_size)
     print("epochs", args.epochs)
 
-    data = gen_data(input_dim=input_dim, bsize=bs)
-    model = build_model(in_dim=input_dim, drate=drop_rate, out=output)
+    data = gen_data(input_dim=args.input_dim, bsize=args.train_batch_size)
+    model = build_model(in_dim=args.input_dim, drate=args.drop_rate, out=args.output)
 
     start_time = time()
     with mlflow.start_run():

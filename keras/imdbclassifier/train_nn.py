@@ -39,7 +39,7 @@ class KTrain():
                       metrics=[metrics])
 
         # Configure for TensorBoard visualization
-        #   Reference: [Monitor progress of your Keras based neural network using Tensorboard](https://bit.ly/2C36EBJ)
+        #   Reference: [Monitor progress of your Keras based neural network using TensorBoard](https://bit.ly/2C36EBJ)
         print("Writing TensorFlow events locally to %s\n" % output_dir)
         tensorboard = TensorBoard(log_dir=output_dir)
 
@@ -257,7 +257,7 @@ class KTrain():
             mlflow.log_artifacts(output_dir, artifact_path="events")
             mlflow.end_run()
 
-        # terminate sessions
+        # terminate tensorboard sessions
         sess.close()
 
         print("loss function use", args.loss)
