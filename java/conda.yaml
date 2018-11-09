@@ -1,0 +1,6 @@
+name: main
+channels:
+  - defaults
+dependencies:
+  - pip:
+    - mlflow

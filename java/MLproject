@@ -1,0 +1,9 @@
+name: quick-start
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+
+    command: "java -cp jars/mlflow-client-0.7.0.jar:jars/slf4j-api-1.7.25.jar:target/java-mlflow-2.0-SNAPSHOT.jar QuickStartJavaClient http://127.0.0.1:5000"
