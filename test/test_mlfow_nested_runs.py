@@ -18,24 +18,10 @@ def get_exp_info(clnt):
 
     return [exp_id, run_id, exp_name]
 
-def run_named_experiment():
+def run_experiment(name=None):
 
-    mlflow.set_experiment("0.8.0_test_nested")
-    with mlflow.start_run(nested=True):
-        mlflow.log_param("mse", 0.10)
-        mlflow.log_param("lr", 0.05)
-        mlflow.log_param("batch_size", 512)
-        with mlflow.start_run(nested=True):
-            mlflow.log_param("max_runs", 32)
-            mlflow.log_param("epochs", 20)
-            mlflow.log_metric("acc", 98)
-            mlflow.log_metric("rmse", 98)
-            with mlflow.start_run(nested=True):
-                mlflow.log_param("max_runs", 60)
-                mlflow.log_metric("mae", 96)
-
-def run_default_experiment():
-
+    if name is not None:
+        mlflow.set_experiment(name)
     with mlflow.start_run(nested=True):
         mlflow.log_param("mse", 0.10)
         mlflow.log_param("lr", 0.05)
@@ -53,7 +39,7 @@ if __name__ == '__main__':
 
     # run default experiment
     print("Running Nested Default Experiment...")
-    run_default_experiment()
+    run_experiment()
     # run named experiment
     print("Running Nested Named Experiment...")
-    run_named_experiment()
+    run_experiment("0.8.0_test_nested")

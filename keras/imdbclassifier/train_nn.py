@@ -214,6 +214,7 @@ class KTrain():
         else:
             print("MLflow Tracking URI: %s" % "local directory 'mlruns'")
 
+        mlflow.set_experiment("Keras_IMDB_Classifier")
         with mlflow.start_run():
             # print out current run_uuid
             run_uuid = mlflow.active_run().info.run_uuid
