@@ -39,7 +39,7 @@ class KTrain():
                       metrics=[metrics])
 
         # Configure for TensorBoard visualization
-        #   Reference: [Monitor progress of your Keras based neural network using TensorBoard](https://bit.ly/2C36EBJ)
+        # Reference: [Monitor progress of your Keras based neural network using TensorBoard](https://bit.ly/2C36EBJ)
         print("Writing TensorFlow events locally to %s\n" % output_dir)
         tensorboard = TensorBoard(log_dir=output_dir)
 
@@ -187,7 +187,7 @@ class KTrain():
         model.summary()
         ktrain_cls.print_metrics(history)
         figure_loss = kplot_cls.plot_loss_graph(history, graph_label_loss)
-        figure_loss.savefig(graph_image_loss_png )
+        figure_loss.savefig(graph_image_loss_png)
         figure_acc = kplot_cls.plot_accuracy_graph(history, graph_label_acc)
         figure_acc.savefig(graph_image_acc_png)
         results = ktrain_cls.evaluate_model(model, x_test, y_test)
@@ -214,7 +214,7 @@ class KTrain():
         else:
             print("MLflow Tracking URI: %s" % "local directory 'mlruns'")
 
-        mlflow.set_experiment("Keras_IMDB_Classifier")
+        mlflow.set_experiment(args.experiment_name)
         with mlflow.start_run():
             # print out current run_uuid
             run_uuid = mlflow.active_run().info.run_uuid
@@ -282,6 +282,7 @@ if __name__ == '__main__':
     print("output:", args.output)
     print("epochs:", args.epochs)
     print("loss:", args.loss)
+    print("experiment_name:", args.experiment_name)
 
     KTrain().train_models(args, flag)
 

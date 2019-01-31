@@ -29,7 +29,7 @@ class KIMDB_Data_Utils():
 
     def fetch_imdb_data(self, num_words=10000):
         """
-        :param num_words: This arguments meants that we want to keep the top 10,000 most frequently occuring words in the training data. Rare words will be discarded
+        :param num_words: This arguments means that we want to keep the top 10,000 most frequently occuring words in the training data. Rare words will be discarded
         :return: The variables train_data and test_data are lists of reviews, each review being a list of word indices (encoding a sequence of words).  train_labels and test_labels are lists of 0s and 1s, where 0 stands for "negative" \
         and 1 stands for "positive":
         """

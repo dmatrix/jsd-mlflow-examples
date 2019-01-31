@@ -38,9 +38,9 @@ class KModel():
 if __name__ == '__main__':
 
     mmaker = KModel()
-    #build the basic model
+    # build the basic model
     model = mmaker.build_basic_model()
     model.summary()
-    #build an experimental
+    # build an experimental
     custom_model = mmaker.build_experimental_model(3, 32, 'mae')
     custom_model.summary()

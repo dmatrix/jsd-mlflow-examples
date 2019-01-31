@@ -25,6 +25,7 @@ if __name__ == '__main__':
     print("output:", args.output)
     print("epochs:", args.epochs)
     print("loss:", args.loss)
+    print("experiment_name:", args.experiment_name)
 
     train_models_cls = KTrain().train_models(args, flag)
 
