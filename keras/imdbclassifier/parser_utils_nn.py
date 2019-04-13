@@ -19,7 +19,7 @@ class KParseArgs():
         self.parser.add_argument("--verbose", help="Verbose output", nargs='?', action='store', default=0, type=int)
         self.parser.add_argument("--run_uuid", help="Specify the MLflow Run ID", nargs='?', action='store', default=None, type=str)
         self.parser.add_argument("--tracking_server", help="Specify the MLflow Tracking Server", nargs='?', action='store', default=None, type=str)
-        self.parser.add_argument("--experiment_name", help="Name of the MLflow Experiment for the runs", nargs='?', action='store', default='Keras_IMDB_Classifier', type=str)
+        self.parser.add_argument("--experiment_name", help="Name of the MLflow Experiment for the runs", nargs='?', action='store', default='/Shared/experiments/Keras_IMDB_Classifier', type=str)
 
     def parse_args(self):
         return self.parser.parse_args()
