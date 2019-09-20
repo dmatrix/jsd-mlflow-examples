@@ -214,7 +214,7 @@ class KTrain():
         else:
             print("MLflow Tracking URI: %s" % "local directory 'mlruns'")
 
-        mlflow.set_experiment(args.experiment_name)
+        #mlflow.set_experiment(args.experiment_name)
         with mlflow.start_run():
             # print out current run_uuid
             run_uuid = mlflow.active_run().info.run_uuid
@@ -282,7 +282,6 @@ if __name__ == '__main__':
     print("output:", args.output)
     print("epochs:", args.epochs)
     print("loss:", args.loss)
-    print("experiment_name:", args.experiment_name)
 
     KTrain().train_models(args, flag)
 

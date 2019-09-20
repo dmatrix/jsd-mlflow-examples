@@ -42,5 +42,5 @@ if __name__ == '__main__':
     model = mmaker.build_basic_model()
     model.summary()
     # build an experimental
-    custom_model = mmaker.build_experimental_model(3, 32, 'mae')
+    custom_model = mmaker.build_experimental_model(3, 32, 'tanh')
     custom_model.summary()
